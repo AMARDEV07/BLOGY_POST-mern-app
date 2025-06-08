@@ -13,7 +13,8 @@ function HomePage() {
         <Link to="/" className="hover:text-blue-600 transition-colors"> Home</Link>
         <span>•</span>
         <span className='text-blue-800'>Blogs and Articles</span>
-        <Link to="/write" className="hover:text-blue-600 transition-colors">.write</Link>
+       <span>•</span>
+        <Link to="/write" className="hover:text-blue-600 transition-colors">write</Link>
        
       </div>
 
@@ -22,8 +23,8 @@ function HomePage() {
 
         {/* title  */}
         <div className='md:w-2/3'>
-          <h1 className='text-gray-800 text-2xl md:text-5xl lg:text-6xl font-bold'>Lorem ipsum dolor sit. Cu!</h1>
-          <p className='mt-8 text-md md:text-xl text-gray-600'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, odio!</p>
+          <h1 className='text-gray-900 text-2xl md:text-5xl lg:text-5xl font-bold'>Your thoughts, your voice, your platform</h1>
+          <p className='mt-8 text-md md:text-xl text-gray-600 italic'>"Start your writing journey — one post at a time."</p>
         </div>
 
 
@@ -51,7 +52,7 @@ function HomePage() {
             </text>
           </svg>
 
-          <button className='absolute top-0 left-0 right-0 bottom-0 m-auto w-20 h-20 bg-blue-800 rounded-full flex items-center justify-center'>
+          <button className='absolute top-0 left-0 right-0 bottom-0 m-auto w-20 h-20 bg-black rounded-full flex items-center justify-center'>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

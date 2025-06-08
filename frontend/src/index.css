@@ -6,13 +6,13 @@
 
 /* Global styles come after imports */
 body {
-    background-color: #e6E6ff;
+    background-color:#d3d9df;
     width: 100vw;
    overflow-x: hidden;
     font-family: "Montserrat", sans-serif;
 }
 .animatebutton{
-    animation-duration: 10000ms;
+    animation-duration: 30000ms;
 
 }
 .ql-container{

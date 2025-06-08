@@ -14,7 +14,7 @@ function PostListItems({post}) {
 
       {/* cover images ka  */}
       {post.img && <div className="md:hidden xl:block xl:w-1/3">
-        <Images src={post.img} className="rounded-2xl object-cover" w="400"  />
+        <Images src={post.img} className="rounded-2xl object-cover shadow-xl/30" w="400"  />
       </div>}
 
 

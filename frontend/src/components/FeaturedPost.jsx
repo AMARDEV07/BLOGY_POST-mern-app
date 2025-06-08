@@ -51,7 +51,7 @@ function FeaturedPost() {
         {posts[0].img && (
           <Images
             src={posts[0].img}
-            className="rounded-3xl object-cover"
+            className="rounded-3xl object-cover shadow-xl/30"
             w="895"
           />
         )}
@@ -81,12 +81,12 @@ function FeaturedPost() {
 
         {/* Post 2 */}
         {posts[1] && (
-          <div className="lg:h-1/3 flex justify-between gap-4">
+          <div className="lg:h-1/3 flex justify-between gap-4 ">
             {posts[1].img && (
               <div className="w-1/2 aspect-video">
                 <Images
                   src={posts[1].img}
-                  className="rounded-2xl object-cover w-full h-full"
+                  className="rounded-2xl object-cover w-full h-full shadow-xl/30"
                   w="298"
                 />
               </div>
@@ -121,7 +121,7 @@ function FeaturedPost() {
               <div className="w-1/2 aspect-video">
                 <Images
                   src={posts[2].img}
-                  className="rounded-2xl object-cover w-full h-full"
+                  className="rounded-2xl object-cover w-full h-full shadow-xl/30"
                   w="298"
                 />
               </div>
@@ -158,7 +158,7 @@ function FeaturedPost() {
               <div className="w-1/2 aspect-video">
                 <Images
                   src={posts[3].img}
-                  className="rounded-2xl object-cover w-full h-full"
+                  className="rounded-2xl object-cover w-full h-full shadow-xl/30"
                   w="298"
                 />
               </div>

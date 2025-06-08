@@ -6,18 +6,18 @@ import { SignedIn, SignedOut, useAuth, UserButton } from "@clerk/clerk-react";
 
 function Navbar() {
   const [openMenu, setopenMenu] = useState(false);
-  const {getToken}=useAuth();
+  const { getToken } = useAuth();
 
 
 
-useEffect(()=>{
-  getToken().then(token=>console.log(token))
-},[])
+  useEffect(() => {
+    getToken().then(token => console.log(token))
+  }, [])
 
 
 
 
-  const HambrugerHandler = () => {
+  const hamburgerHandler = () => {
     setopenMenu((prev) => !prev); //set prev value
   };
 
@@ -48,25 +48,83 @@ useEffect(()=>{
 
 
       {/* MOBILE MENU */}
-      <div className="md:hidden">
-        <div className="cursor-pointer text-2xl" onClick={HambrugerHandler}>{openMenu ? "X" : "  ☰"} </div>
 
-        {/* MOBILE LINKS  */}
-        <div
-          className={` w-full h-screen bg-gray-200 flex flex-col items-center justify-center gap-8 text-lg font-medium fixed top-16 transition-all ease-in-out 
-                    ${openMenu ? "-right-0" : "-right-[100%]"}`}
+      <div className="md:hidden">
+
+        {/* Hamburger Menu Button */}
+
+        <button
+          className="cursor-pointer text-2xl p-2 hover:bg-gray-100 rounded-md transition-colors duration-200"
+          onClick={hamburgerHandler}
+          aria-label="Toggle menu"
         >
-          <Link to="/">Home</Link>
-          <Link to="/tranding">Tranding</Link>
-          <Link to="/popular">Most Popupar</Link>
-          <Link to="/about">about</Link>
-          <Link to="/login">
-            <button className="py-2 px-4 rounded-3xl bg-blue-800 text-white">
-              login
-            </button>
-          </Link>
+          {openMenu ? "✕" : "☰"}
+        </button>
+        
+
+        {/* Mobile Menu Overlay */}
+        <div
+          className={`fixed top-0 left-0 w-full h-screen  bg-opacity-50 z-40 transition-opacity duration-300 ${openMenu ? "opacity-100" : "opacity-0 pointer-events-none"
+            }`}
+          onClick={hamburgerHandler}
+        />
+
+        {/* Mobile Navigation Links */}
+        <div
+          className={`fixed top-0 right-0 w-80 max-w-[85vw] h-screen bg-white shadow-2xl flex flex-col items-center justify-center gap-8 text-lg font-medium z-50 transform transition-transform duration-300 ease-in-out ${openMenu ? "translate-x-0" : "translate-x-full"
+            }`}
+        >
+          {/* Close Button */}
+          <button
+            className="absolute top-6 right-6 text-2xl p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
+            onClick={hamburgerHandler}
+            aria-label="Close menu"
+          >
+            ✕
+          </button>
+
+          {/* Navigation Links */}
+          <nav className="flex flex-col items-center gap-6 mt-8">
+            <Link
+              to="/"
+              className="py-3 px-6 hover:bg-gray-50 rounded-lg transition-colors duration-200 text-gray-800 hover:text-black"
+              onClick={hamburgerHandler}
+            >
+              Home
+            </Link>
+            <Link
+              to="/trending"
+              className="py-3 px-6 hover:bg-gray-50 rounded-lg transition-colors duration-200 text-gray-800 hover:text-black"
+              onClick={hamburgerHandler}
+            >
+              Trending
+            </Link>
+            <Link
+              to="/popular"
+              className="py-3 px-6 hover:bg-gray-50 rounded-lg transition-colors duration-200 text-gray-800 hover:text-black"
+              onClick={hamburgerHandler}
+            >
+              Most Popular
+            </Link>
+            <Link
+              to="/about"
+              className="py-3 px-6 hover:bg-gray-50 rounded-lg transition-colors duration-200 text-gray-800 hover:text-black"
+              onClick={hamburgerHandler}
+            >
+              About
+            </Link>
+            <Link
+              to="/login"
+              onClick={hamburgerHandler}
+            >
+              <button className="py-3 px-8 rounded-full bg-black text-white hover:bg-gray-800 transition-colors duration-200 font-medium shadow-lg">
+                Login
+              </button>
+            </Link>
+          </nav>
         </div>
       </div>
+
 
       {/* DESKTOP MENU*/}
       <div className="hidden md:flex items-center gap-8 xl:gap-12  font-medium">
@@ -77,7 +135,7 @@ useEffect(()=>{
         {/* //clerk component.... //signout */}
         <SignedOut>
           <Link to="/login">
-            <button className="py-2 px-4 rounded-3xl bg-blue-800 text-white">
+            <button className="py-2 px-4 rounded-3xl bg-black text-white">
               login
             </button>
           </Link>
