@@ -1,24 +1,26 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Images from "./Images";
-import { SignedIn, SignedOut, useAuth, UserButton } from "@clerk/clerk-react";
-
+import { SignedIn, SignedOut, useAuth, UserButton, useClerk } from "@clerk/clerk-react";
 
 function Navbar() {
-  const [openMenu, setopenMenu] = useState(false);
-  const { getToken } = useAuth();
 
+  const [openMenu, setOpenMenu] = useState(false);
+  const navigate = useNavigate();
+  
+  const { getToken } = useAuth();
+  const { signOut } = useClerk(); // Add this to access signOut function
 
 
   useEffect(() => {
-    getToken().then(token => console.log(token))
-  }, [])
+    getToken().then(token => console.log(token));
+  }, [getToken]);
 
 
 
 
   const hamburgerHandler = () => {
-    setopenMenu((prev) => !prev); //set prev value
+    setOpenMenu((prev) => !prev);
   };
 
 
@@ -26,15 +28,20 @@ function Navbar() {
 
 
 
-
+  const handleLogout = async () => {
+    hamburgerHandler(); // Close the mobile menu
+   
+      await signOut(); // Actually sign out from Clerk
+      navigate("/"); // Navigate to home instead of login
+   
+  };
 
   return (
     <div className="w-full h-16 md:h-20 flex items-center justify-between">
 
 
-      {/* LOGO  */}
+      {/* LOGO */}
       <Link to="/" className="flex items-center gap-4 text-2xl font-bold">
-        {/* Create component for images to reuse across app */}
         <Images
           src="logo.png"
           className="rounded-2xl"
@@ -47,12 +54,12 @@ function Navbar() {
 
 
 
-      {/* MOBILE MENU */}
 
+      {/* MOBILE MENU */}
       <div className="md:hidden">
 
-        {/* Hamburger Menu Button */}
 
+        {/* Hamburger Menu Button */}
         <button
           className="cursor-pointer text-2xl p-2 hover:bg-gray-100 rounded-md transition-colors duration-200"
           onClick={hamburgerHandler}
@@ -60,19 +67,25 @@ function Navbar() {
         >
           {openMenu ? "✕" : "☰"}
         </button>
-        
 
+
+        
         {/* Mobile Menu Overlay */}
         <div
-          className={`fixed top-0 left-0 w-full h-screen  bg-opacity-50 z-40 transition-opacity duration-300 ${openMenu ? "opacity-100" : "opacity-0 pointer-events-none"
-            }`}
+          className={`fixed top-0 left-0 w-full h-screen bg-black bg-opacity-50 z-40 transition-opacity duration-300 ${
+            openMenu ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
           onClick={hamburgerHandler}
         />
 
+
+
+
         {/* Mobile Navigation Links */}
         <div
-          className={`fixed top-0 right-0 w-80 max-w-[85vw] h-screen bg-white shadow-2xl flex flex-col items-center justify-center gap-8 text-lg font-medium z-50 transform transition-transform duration-300 ease-in-out ${openMenu ? "translate-x-0" : "translate-x-full"
-            }`}
+          className={`fixed top-0 right-0 w-80 max-w-[85vw] h-screen bg-white shadow-2xl flex flex-col items-center justify-center gap-8 text-lg font-medium z-50 transform transition-transform duration-300 ease-in-out ${
+            openMenu ? "translate-x-0" : "translate-x-full"
+          }`}
         >
           {/* Close Button */}
           <button
@@ -113,38 +126,58 @@ function Navbar() {
             >
               About
             </Link>
-            <Link
-              to="/login"
-              onClick={hamburgerHandler}
-            >
-              <button className="py-3 px-8 rounded-full bg-black text-white hover:bg-gray-800 transition-colors duration-200 font-medium shadow-lg">
-                Login
+
+
+
+
+            {/* Mobile Authentication */}
+            <SignedOut>
+              <Link
+                to="/login"
+                onClick={hamburgerHandler}
+              >
+                <button className="py-3 px-8 rounded-full bg-black text-white hover:bg-gray-800 transition-colors duration-200 font-medium shadow-lg">
+                  Login
+                </button>
+              </Link>
+            </SignedOut>
+
+
+
+            <SignedIn>
+              <button 
+                onClick={handleLogout}
+                className="py-3 px-8 rounded-full bg-black text-white hover:bg-gray-800 transition-colors duration-200 font-medium shadow-lg"
+              >
+                Logout
               </button>
-            </Link>
+            </SignedIn>
+
           </nav>
         </div>
       </div>
 
 
-      {/* DESKTOP MENU*/}
-      <div className="hidden md:flex items-center gap-8 xl:gap-12  font-medium">
+
+
+
+
+      {/* DESKTOP MENU */}
+      <div className="hidden md:flex items-center gap-8 xl:gap-12 font-medium">
         <Link to="/">Home</Link>
-        <Link to="/tranding">Tranding</Link>
-        <Link to="/popular">Most Popupar</Link>
-        <Link to="/about">about</Link>
-        {/* //clerk component.... //signout */}
+        <Link to="/trending">Trending</Link>
+        <Link to="/popular">Most Popular</Link>
+        <Link to="/about">About</Link>
+        
         <SignedOut>
           <Link to="/login">
-            <button className="py-2 px-4 rounded-3xl bg-black text-white">
-              login
+            <button className="py-2 px-4 rounded-3xl bg-black text-white hover:bg-gray-800 transition-colors duration-200">
+              Login
             </button>
           </Link>
         </SignedOut>
 
-        {/* //SignedIn */}
-
         <SignedIn>
-          {/* user btn  */}
           <UserButton />
         </SignedIn>
       </div>
