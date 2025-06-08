@@ -1,0 +1,71 @@
+/* Import fonts first */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Then import Tailwind */
+@import "tailwindcss";
+
+/* Global styles come after imports */
+body {
+    background-color: #e6E6ff;
+    width: 100vw;
+   overflow-x: hidden;
+    font-family: "Montserrat", sans-serif;
+}
+.animatebutton{
+    animation-duration: 10000ms;
+
+}
+.ql-container{
+    border: none !important;
+
+}
+.ql-toolbar{
+    border: none !important;
+
+}
+.ql-editor{
+    border: none !important;
+
+}
+ /* #file-upload-button{
+    background-color:red;
+     border: none !important;
+} */
+
+/* Add this CSS to your global CSS file or component-specific CSS */
+
+/* Override Quill editor default styles */
+.quill-content-override {
+  background: transparent !important;
+}
+
+.quill-content-override * {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.quill-content-override p {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.quill-content-override div {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.quill-content-override .ql-editor {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* If using Tailwind, you can also use these utilities */
+.quill-content-override .ql-editor {
+  @apply bg-transparent;
+}
+
+/* Remove any inline styles that might be setting background */
+.quill-content-override [style*="background"] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
