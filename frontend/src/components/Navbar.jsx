@@ -1,19 +1,29 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Images from "./Images";
-import { SignedIn, SignedOut, useAuth, UserButton, useClerk } from "@clerk/clerk-react";
+import {
+  SignedIn,
+  SignedOut,
+  useAuth,
+  UserButton,
+  useClerk,
+} from "@clerk/clerk-react";
+
+
+
 
 function Navbar() {
-
   const [openMenu, setOpenMenu] = useState(false);
   const navigate = useNavigate();
-  
+
   const { getToken } = useAuth();
-  const { signOut } = useClerk(); // Add this to access signOut function
+  const { signOut } = useClerk();
 
 
+
+  
   useEffect(() => {
-    getToken().then(token => console.log(token));
+    getToken().then((token) => console.log(token));
   }, [getToken]);
 
 
@@ -26,15 +36,14 @@ function Navbar() {
 
 
 
-
-
   const handleLogout = async () => {
-    hamburgerHandler(); // Close the mobile menu
-   
-      await signOut(); // Actually sign out from Clerk
-      navigate("/"); // Navigate to home instead of login
-   
+    hamburgerHandler();
+    await signOut();
+    navigate("/");
   };
+
+
+
 
   return (
     <div className="w-full h-16 md:h-20 flex items-center justify-between">
@@ -52,11 +61,9 @@ function Navbar() {
         <span>AmanBlog</span>
       </Link>
 
-
-
-
       {/* MOBILE MENU */}
       <div className="md:hidden">
+
 
 
         {/* Hamburger Menu Button */}
@@ -69,7 +76,6 @@ function Navbar() {
         </button>
 
 
-        
         {/* Mobile Menu Overlay */}
         <div
           className={`fixed top-0 left-0 w-full h-screen bg-black bg-opacity-50 z-40 transition-opacity duration-300 ${
@@ -77,9 +83,6 @@ function Navbar() {
           }`}
           onClick={hamburgerHandler}
         />
-
-
-
 
         {/* Mobile Navigation Links */}
         <div
@@ -105,20 +108,39 @@ function Navbar() {
             >
               Home
             </Link>
+
             <Link
-              to="/trending"
+              to="/posts"
+              className="py-3 px-6 hover:bg-gray-50 rounded-lg transition-colors duration-200 text-gray-800 hover:text-black"
+              onClick={hamburgerHandler}
+            >
+              All posts
+            </Link>
+
+            <Link
+              to="/posts?sort=trending"
               className="py-3 px-6 hover:bg-gray-50 rounded-lg transition-colors duration-200 text-gray-800 hover:text-black"
               onClick={hamburgerHandler}
             >
               Trending
             </Link>
+
             <Link
-              to="/popular"
+              to="/posts?sort=oldest"
               className="py-3 px-6 hover:bg-gray-50 rounded-lg transition-colors duration-200 text-gray-800 hover:text-black"
               onClick={hamburgerHandler}
             >
-              Most Popular
+              oldest
             </Link>
+
+            <Link
+              to="/write"
+              className="py-3 px-6 hover:bg-gray-50 rounded-lg transition-colors duration-200 text-gray-800 hover:text-black"
+              onClick={hamburgerHandler}
+            >
+              Write
+            </Link>
+            
             <Link
               to="/about"
               className="py-3 px-6 hover:bg-gray-50 rounded-lg transition-colors duration-200 text-gray-800 hover:text-black"
@@ -127,48 +149,51 @@ function Navbar() {
               About
             </Link>
 
-
-
-
             {/* Mobile Authentication */}
             <SignedOut>
-              <Link
-                to="/login"
-                onClick={hamburgerHandler}
-              >
+              <Link to="/login" onClick={hamburgerHandler}>
                 <button className="py-3 px-8 rounded-full bg-black text-white hover:bg-gray-800 transition-colors duration-200 font-medium shadow-lg">
                   Login
                 </button>
               </Link>
             </SignedOut>
 
-
-
             <SignedIn>
-              <button 
+              <button
                 onClick={handleLogout}
                 className="py-3 px-8 rounded-full bg-black text-white hover:bg-gray-800 transition-colors duration-200 font-medium shadow-lg"
               >
                 Logout
               </button>
             </SignedIn>
-
           </nav>
         </div>
       </div>
 
-
-
-
-
-
       {/* DESKTOP MENU */}
       <div className="hidden md:flex items-center gap-8 xl:gap-12 font-medium">
-        <Link to="/">Home</Link>
-        <Link to="/trending">Trending</Link>
-        <Link to="/popular">Most Popular</Link>
-        <Link to="/about">About</Link>
-        
+        <Link to="/" className="hover:text-blue-600 transition-colors">
+          Home
+        </Link>
+
+        {/* Use query parameters to match SideMenu */}
+        <Link
+          to="/posts?sort=trending"
+          className="hover:text-blue-600 transition-colors"
+        >
+          Trending
+        </Link>
+        <Link
+          to="/posts?sort=Popular"
+          className="hover:text-blue-600 transition-colors"
+        >
+          Most Popular
+        </Link>
+
+        <Link to="/about" className="hover:text-blue-600 transition-colors">
+          About
+        </Link>
+
         <SignedOut>
           <Link to="/login">
             <button className="py-2 px-4 rounded-3xl bg-black text-white hover:bg-gray-800 transition-colors duration-200">

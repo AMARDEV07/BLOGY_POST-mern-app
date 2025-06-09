@@ -10,11 +10,14 @@ import MainLayout from "./Layouts/MainLayout";
 import WritePage from "./Routes/WritePage";
 import LoginPage from "./Routes/LoginPage";
 import RegisterPage from "./Routes/RegisterPage";
+
 //clerk for login log out sercure routes
 import { ClerkProvider } from "@clerk/clerk-react";
+
 //host tost for notfication
 import { Toaster } from "react-hot-toast";
 //react query..
+
 import {QueryClient,QueryClientProvider,} from '@tanstack/react-query'
 const queryClient = new QueryClient()
 
