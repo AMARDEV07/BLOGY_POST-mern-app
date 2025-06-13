@@ -123,22 +123,12 @@ function SinglePostPage() {
 
           <h1 className="mt-8 mb-4 text-sm font-medium">Categoriese</h1>
           <div className="flex flex-col gap-2 text-sm ">
-            <Link className="underline">All</Link>
-            <Link to=" " className="underline">
-              web designe
-            </Link>
-            <Link to=" " className="underline">
-              Development
-            </Link>
-            <Link to=" " className="underline">
-              Database
-            </Link>
-            <Link to=" " className="underline">
-              search Engines
-            </Link>
-            <Link to=" " className="underline">
-              Marketing
-            </Link>
+            <Link to="/Posts" className="underline">All</Link>
+            <Link to="/Posts?cat=%20Web-Designe"  className="underline"> web designe</Link>
+            <Link to="/Posts?cat=Development" className="underline">Development</Link>
+            <Link to="/Posts?cat=Database" className="underline">Database </Link>
+            <Link to="/Posts?cat=Search-Engines" className="underline">search Engines </Link>
+            <Link to="/Posts?cat=Marketing" className="underline"> Marketing </Link>
           </div>
 
           {/* search div  */}

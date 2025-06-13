@@ -29,7 +29,7 @@ const authenticator = async () => {
 
 
 
-function Uplode({children, type, setProgress, setData}) {
+function Uplode({ children, type, setProgress, setData }) {
   const ref = useRef(null);
   // on error function of uplode images
   const onError = (err) => {
@@ -57,6 +57,22 @@ function Uplode({children, type, setProgress, setData}) {
 
 
 
+  
+  // Handle click with better control
+  const handleClick = (e) => {
+    e.preventDefault(); // Prevent any form submission
+    e.stopPropagation(); // Stop event bubbling
+
+    console.log("Upload button clicked"); // Debug log
+
+    if (ref.current) {
+      ref.current.click();
+    }
+  };
+
+
+
+
   return (
     <IKContext
       className="border-4 bg-black"
@@ -77,7 +93,7 @@ function Uplode({children, type, setProgress, setData}) {
       />
 
       {/* this using making cutsom choosing elemnt  */}
-      <div className="cursor-pointer" onClick={() => ref.current.click()}>
+      <div className="cursor-pointer" onClick={handleClick}>
         {children}
       </div>
 
