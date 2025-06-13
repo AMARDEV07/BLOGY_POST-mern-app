@@ -1,3 +1,5 @@
+# Blogy Post MERN App
+This is my awesome blog app built using MERN stack!
 
 
 ## 📘 ***Introduction to the Blog App (Full-Stack Project)***
